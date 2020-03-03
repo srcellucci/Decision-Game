@@ -34,7 +34,7 @@ class QuestionScreen extends State<FirstScreen> {
   final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
 
-  void _nextScreen() {
+  void _nextScreen() {                           //navigates to the second screen
     Navigator.of(context).push (
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -51,7 +51,7 @@ class QuestionScreen extends State<FirstScreen> {
         title: Text('Welcome to the Decision Game',
         style: _titleFont), //Top of the screen
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen),
+          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
         ],
       ),
       body: Padding(
@@ -70,11 +70,12 @@ class QuestionScreen extends State<FirstScreen> {
   }
 }
 
+//Creates the OutcomeScreen Class
 class SecondScreen extends StatefulWidget {
   @override
   OutcomeScreen createState() => OutcomeScreen();
 
-} //creates the OutcomeScreen Class
+}
 
 //This screen will display the outcomes
 class OutcomeScreen extends State<SecondScreen> {
