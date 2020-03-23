@@ -8,5 +8,7 @@ In changes to the main.dart file, i've added the navigation to the second screen
 3/23/20: [Forked a new branch to my GitHub and on my local machine, This is just a little addition in order to create the new branch.
 
 17:15 This is a test to see if commit signing is working correctly.
+
+
 19:20 Added project dependent files so future pull requests or clones can be imported directly into Android Studio or VSCode without need to copy code from GitHub and create a new project.
 ]
