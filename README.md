@@ -11,4 +11,5 @@ In changes to the main.dart file, i've added the navigation to the second screen
 
 
 19:20 Added project dependent files so future pull requests or clones can be imported directly into Android Studio or VSCode without need to copy code from GitHub and create a new project.
-]
+
+21:13 Still very unfamilliar with Flutter and Dart, added a basic action button so I can work on implementing user functionality to enter multiple outcomes. Aiming to get started on that tommorow.]
