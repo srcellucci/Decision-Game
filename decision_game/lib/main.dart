@@ -79,42 +79,92 @@ class SecondScreen extends StatefulWidget {
 
 //This screen will display the outcomes
 class OutcomeScreen extends State<SecondScreen> {
-  final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
+  int _count = 1;
+
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Possible Outcomes',
-            style: _titleFont,
-          ), //End of Text
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: TextFormField(
-            decoration: InputDecoration(
-                labelText: 'Outcome one...'
-            ),
-            style: _biggerFont, //Increase font size
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(height: 50.0,),
-        ),
-        floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() {
+    List<Widget> _outcomes =
+        new List.generate(_count, (int i) => new ContactColumn());
 
-        }),
-        tooltip: 'Increment Counter',
-        child: Icon(Icons.add),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
+   return new Scaffold(
+
+       body: new LayoutBuilder(builder: (context, constraint) {
+         final _maxHeight= constraint.biggest.height;
+         final _biggerFont = TextStyle(fontSize: _maxHeight/ 6);
+
+        return new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+           new Container(
+           height: _maxHeight,
+           child: new ListView(
+             children: _outcomes,
+             scrollDirection: Axis.vertical,
+           ),
+         ),
+
+
+            ],
+         ),
+        );
+       }),
+     bottomNavigationBar: BottomAppBar(
+       shape: const CircularNotchedRectangle(),
+       child: Container(height: 50.0,),
+     ),
+     floatingActionButton: FloatingActionButton(
+       onPressed: _addNewContactColumn,
+       tooltip: 'Increment Counter',
+       backgroundColor: Colors.purple,
+       child: Icon(Icons.add),
+     ),
+     floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
+     appBar: AppBar(
+       title: Text('Possible Outcomes',
+         style: _titleFont,
+       ), //End of Text
+     ),
+   );
+
+
   }
 
+  void _addNewContactColumn() {
+    setState(() {
+      _count = _count + 1;
+    });
+  }
 }
+
+class ContactColumn extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => new _ContactColumn();
+}
+
+class _ContactColumn extends State<ContactColumn>
+{
+  final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return new Container(
+        child: new Column(children: <Widget>[
+        new TextFormField(
+          decoration: new InputDecoration(
+            labelText: 'Enter Outcome'
+          ),
+          style: _biggerFont,
+        ),
+      ]));
+
+  }
+}
+
+
 
 //Creates the Goodness Screen class
 class ThirdScreen extends StatefulWidget {
