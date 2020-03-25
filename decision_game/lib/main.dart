@@ -126,6 +126,9 @@ class OutcomeScreen extends State<SecondScreen> {
        title: Text('Possible Outcomes',
          style: _titleFont,
        ), //End of Text
+       actions: <Widget>[
+         IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+       ],
      ),
    );
 
@@ -136,6 +139,16 @@ class OutcomeScreen extends State<SecondScreen> {
     setState(() {
       _count = _count + 1;
     });
+  }
+
+  void _nextScreen() { //navigates to the Third screen
+    Navigator.of(context).push (
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return ThirdScreen();
+            }
+        )
+    );
   }
 }
 
@@ -152,7 +165,7 @@ class _ContactColumn extends State<ContactColumn>
   Widget build(BuildContext context)
   {
     return new Container(
-        child: new Column(children: <Widget>[
+        child: new Column(children: <Widget>[    //TODO: Add remove functionality to Contact Column children
         new TextFormField(
           decoration: new InputDecoration(
             labelText: 'Enter Outcome'
@@ -179,9 +192,25 @@ class GoodScreen extends State<ThirdScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('This is the Third Screen',
-      style: _biggerFont,
-    ); //End of Text
+    return Scaffold(
+        appBar: AppBar(
+        title: Text('Goodness Rating',
+        style: _titleFont), //Top of the screen
+    actions: <Widget>[
+    IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+    ],
+    ),
+    );
+  }
+
+  void _nextScreen() { //navigates to the Third screen
+    Navigator.of(context).push (
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return FourthScreen();
+            }
+        )
+    );
   }
 }
 
@@ -198,9 +227,26 @@ class ProbScreen extends State<FourthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('This is the fourth Screen',
-      style: _biggerFont,
-    ); //End of Text
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Probability',
+            style: _titleFont), //Top of the screen
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+        ],
+      ),
+    );
+  }
+
+
+  void _nextScreen() { //navigates to the Third screen
+    Navigator.of(context).push (
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return FifthScreen();
+            }
+        )
+    );
   }
 }
 
@@ -217,9 +263,25 @@ class OverviewScreen extends State<FifthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('This is the Fifth Screen',
-      style: _biggerFont,
-    ); //End of Text
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Overview',
+            style: _titleFont), //Top of the screen
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+        ],
+      ),
+    );
+  }
+
+  void _nextScreen() { //navigates to the Third screen
+    Navigator.of(context).push (
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return SixthScreen();
+            }
+        )
+    );
   }
 }
 
@@ -236,9 +298,12 @@ class OutputScreen extends State<SixthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Text('This is the Final Screen',
-      style: _biggerFont,
-    ); //End of Text
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Output',
+            style: _titleFont), //Top of the screen
+      ),
+    );
   }
 }
 
