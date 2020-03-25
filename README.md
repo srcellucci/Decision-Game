@@ -14,5 +14,7 @@ In changes to the main.dart file, i've added the navigation to the second screen
 
 21:13 Still very unfamilliar with Flutter and Dart, added a basic action button so I can work on implementing user functionality to enter multiple outcomes. Aiming to get started on that tommorow.]
 
-3/24/20: [Added functionallity required to input multiple outcomes.]
+3/24/20: [Added functionality required to input multiple outcomes.
+
+21:25 Added functionality required to navigate between all screens]
 
