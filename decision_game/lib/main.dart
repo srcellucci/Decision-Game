@@ -7,7 +7,12 @@ Team Giraffe's decsion game project for Software Engineering I.
 // found in the LICENSE file.
 //Decision Game Code for Team Giraffe
 
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:decisiongame/globals.dart' as globals;
+import 'package:provider/provider.dart';
+
+GlobalKey<_OutcomeBuilder> globalKey = GlobalKey();
 
 void main() => runApp(MyApp());
 
@@ -74,54 +79,53 @@ class QuestionScreen extends State<FirstScreen> {
 class SecondScreen extends StatefulWidget {
   @override
   OutcomeScreen createState() => OutcomeScreen();
-
 }
 
 //This screen will display the outcomes
-class OutcomeScreen extends State<SecondScreen> {
-  int _count = 1;
 
+class OutcomeScreen extends State<SecondScreen> {
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
+  static StreamController<void> buttonPressStream = StreamController<bool>.broadcast();
+  final OutcomeBuilder outcomes = new OutcomeBuilder(buttonPressStream);
+
+
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _outcomes =
-        new List.generate(_count, (int i) => new ContactColumn());
 
    return new Scaffold(
-
        body: new LayoutBuilder(builder: (context, constraint) {
+
          final _maxHeight= constraint.biggest.height;
-         final _biggerFont = TextStyle(fontSize: _maxHeight/ 6);
 
         return new Center(
+
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
            new Container(
+             padding: EdgeInsets.all(30.0),
            height: _maxHeight,
-           child: new ListView(
-             children: _outcomes,
-             scrollDirection: Axis.vertical,
-           ),
-         ),
-
-
-            ],
+           child: outcomes,
+         ),],
          ),
         );
        }),
+
      bottomNavigationBar: BottomAppBar(
        shape: const CircularNotchedRectangle(),
        child: Container(height: 50.0,),
      ),
+
      floatingActionButton: FloatingActionButton(
-       onPressed: _addNewContactColumn,
+       onPressed: () => buttonPressStream.add(null),
        tooltip: 'Increment Counter',
        backgroundColor: Colors.purple,
        child: Icon(Icons.add),
      ),
+
      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
+
      appBar: AppBar(
        title: Text('Possible Outcomes',
          style: _titleFont,
@@ -135,11 +139,9 @@ class OutcomeScreen extends State<SecondScreen> {
 
   }
 
-  void _addNewContactColumn() {
-    setState(() {
-      _count = _count + 1;
-    });
-  }
+
+
+
 
   void _nextScreen() { //navigates to the Third screen
     Navigator.of(context).push (
@@ -152,31 +154,86 @@ class OutcomeScreen extends State<SecondScreen> {
   }
 }
 
-class ContactColumn extends StatefulWidget {
+class OutcomeBuilder extends StatefulWidget {
+  final StreamController<void> buttonPressStream;
+  const OutcomeBuilder(this.buttonPressStream);
+
   @override
-  State<StatefulWidget> createState() => new _ContactColumn();
+  _OutcomeBuilder createState() => _OutcomeBuilder(buttonPressStream);
 }
 
-class _ContactColumn extends State<ContactColumn>
+class _OutcomeBuilder extends State<OutcomeBuilder>
 {
-  final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
 
+  List<OutcomeOption> outcomeOptionList;
+
+  StreamController<void> buttonPressStream;
+  _OutcomeBuilder(this.buttonPressStream);
+
+ void removeOutcomeOption(index) //TODO: Ensure count never < 1, handle that exception
+ {
+   setState(() {
+     outcomeOptionList.remove(index);
+     globals.count = globals.count - 1;
+   });
+ }
+
+ void addOutcomeOption(){
+   setState(() {
+     outcomeOptionList = List.generate(globals.count, (index) => OutcomeOption(removeOutcomeOption, index: index)); //now we use the global var to increment our list for any additional outcomes > 1
+     globals.count = globals.count + 1;
+   });
+ }
+
+ void initState(){
+   super.initState();
+   outcomeOptionList = List.generate(1, (index) => OutcomeOption(removeOutcomeOption, index: index)); //Create an inital outcome option as to avoid empty list view
+   buttonPressStream.stream.listen( (_) {
+     setState(() {addOutcomeOption();});
+   });
+ }
   @override
   Widget build(BuildContext context)
   {
-    return new Container(
-        child: new Column(children: <Widget>[    //TODO: Add remove functionality to Contact Column children
-        new TextFormField(
-          decoration: new InputDecoration(
-            labelText: 'Enter Outcome'
-          ),
-          style: _biggerFont,
-        ),
-      ]));
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[...outcomeOptionList],
+        scrollDirection: Axis.vertical,
+      ),
+    );
 
   }
+
 }
 
+class OutcomeOption extends StatelessWidget {
+ final int index;
+ final Function(OutcomeOption) removeOutcomeOption;
+
+ final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
+
+ const OutcomeOption(this.removeOutcomeOption, {Key key, @required this.index})
+        : super(key: key);
+
+ @override
+  Widget build(BuildContext context) {
+   return new Container(
+       child: new Column(children: <Widget>[
+         new TextFormField(
+           decoration: new InputDecoration(
+             labelText: 'Enter Outcome', //TODO: Save outcome string into ExpectedUtil Object/Class
+             prefixIcon: Icon(Icons.queue),
+             suffixIcon: new IconButton(
+               icon: Icon(Icons.clear),
+               onPressed: (){removeOutcomeOption(this);},
+             ),
+           ),
+           style: _biggerFont,
+
+         ), SizedBox(height: 50),
+       ]));
+  }
+}
 
 
 //Creates the Goodness Screen class
