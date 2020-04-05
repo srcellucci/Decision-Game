@@ -7,14 +7,16 @@ In changes to the main.dart file, i've added the navigation to the second screen
 
 3/23/20: [Forked a new branch to my GitHub and on my local machine, This is just a little addition in order to create the new branch.
 
-17:15 This is a test to see if commit signing is working correctly.
+17:15 [This is a test to see if commit signing is working correctly.]
 
 
-19:20 Added project dependent files so future pull requests or clones can be imported directly into Android Studio or VSCode without need to copy code from GitHub and create a new project.
+19:20 [Added project dependent files so future pull requests or clones can be imported directly into Android Studio or VSCode without need to copy code from GitHub and create a new project.]
 
-21:13 Still very unfamilliar with Flutter and Dart, added a basic action button so I can work on implementing user functionality to enter multiple outcomes. Aiming to get started on that tommorow.]
+21:13 [Still very unfamilliar with Flutter and Dart, added a basic action button so I can work on implementing user functionality to enter multiple outcomes. Aiming to get started on that tommorow.]
 
 3/24/20: [Added functionality required to input multiple outcomes.
 
-21:25 Added functionality required to navigate between all screens]
+21:25 [Added functionality required to navigate between all screens]
+
+4/4/2020: [Added remove functionality to outcome screen and cleaned up the UI, added globals.dart, updated pubspec.lock and pubspec.yaml]
 
