@@ -1,6 +1,6 @@
 /*
 # Decision-Game
-Team Giraffe's decsion game project for Software Engineering I.
+Team Giraffe's decision game project for Software Engineering I.
 */
 // Copyright 2018 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:decisiongame/globals.dart' as globals;
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 GlobalKey<_OutcomeBuilder> globalKey = GlobalKey();
 
@@ -244,21 +245,207 @@ class ThirdScreen extends StatefulWidget {
 
 //Display the Goodness Screen
 class GoodScreen extends State<ThirdScreen> {
-  final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
-  final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
+    //Local variables for Rating Screen
+  var outcomesList = new List();
+  int index = 0;
+  String _output = "Hello! Welcome to the Ratings Screen.";
 
+//Adds things to the list to be further displayed and dynamically rotated about
+  void populateList()
+  {
+  outcomesList.add("OUTCOME #1");
+  outcomesList.add("OUTCOME #2");
+  outcomesList.add("OUTCOME #3");
+  }
+
+  void changeData()
+  {
+    setState((){
+        if (index<outcomesList.length)
+        {
+          _output = outcomesList[index];
+          index++;
+        }//End of if
+        else
+        {
+          if (index >= outcomesList.length)
+          {
+            _output = "END OF LIST";
+          }//End of if
+        }//End of else
+    });
+  }
+
+  //App builds user interface and adds functionality accordingly
   @override
   Widget build(BuildContext context) {
+    populateList();
     return Scaffold(
-        appBar: AppBar(
-        title: Text('Goodness Rating',
-        style: _titleFont), //Top of the screen
-    actions: <Widget>[
-    IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
-    ],
+      appBar: new AppBar(
+        title: new Text("Ratings Screen"),
+        ),
+       body:  new Center(
+         child: Container(
+              padding: EdgeInsets.only(top: 20.0, bottom: 20),
+              alignment: Alignment.center,
+              color: Colors.lightBlue,
+              
+              child: Column(
+                  children: <Widget>[
+               /*
+                Widget 1 - Main Header
+                - Provides instructions to user about screen
+                @author: JT Kurtz
+              */
+                Expanded(
+                    child: Text (
+                    'Define the goodness of the following outcome:',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white
+                      
+                      ), 
+                    ),
+              ), //End of Main Header Grouping
+              
+              /*
+                Widget 2 - Dynamic Outcome Diplaying
+                Based upon onPressed() of a button
+                @author: JT Kurtz
+              */
+
+              Expanded(
+                    child: Text (
+                    '$_output',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white
+                      ), 
+                    ),
+              ), 
+
+              
+               /*
+                Widget 3 - List Wheel Scroll View
+                - User defines the goodness of an outcome
+                @author: JT Kurtz
+              */
+              Expanded(
+                
+                child:ListWheelScrollView(
+              itemExtent: 100,
+              children: <Widget>[
+              
+            //BOX 1 - FACE PLUS 2
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              child: Container(
+                height: 100.0,
+                width: 100.0,
+                color : Colors.orange,
+                child: 
+                  Icon(
+                  FontAwesomeIcons.solidGrin,
+                  size: 65.0,
+                ),
+                  ),
+            ),
+            //BOX 2 - FACE PLUS 1
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              child: Container(
+                height:100.0,
+                width: 100.0,
+                color: Colors.green,
+                child: 
+                  Icon(
+                  FontAwesomeIcons.solidSmile,
+                  size: 65.0,
+                ),
+                  ),
+            ),
+            //BOX 3 - FACE ZERO
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              child: Container(
+                height:100.0,
+                width: 100.0,
+                color: Colors.yellow,
+                child: 
+                  Icon(
+                  FontAwesomeIcons.solidMeh,
+                  size: 65.0,
+                ),
+                  ),
+            ),
+            //BOX 4 - FACE MINUS 1
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              child: Container(
+                height:100.0,
+                width: 100.0,
+                color: Colors.blue,
+                child: 
+                  Icon(
+                  FontAwesomeIcons.solidFrown,
+                  size: 65.0,
+                ),
+                  ),
+            ),
+            //BOX 5 - FACE MINUS 2
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              child: Container(
+                height:100.0,
+                width: 100.0,
+                color: Colors.red,
+                child: 
+                  Icon(
+                  FontAwesomeIcons.solidFrownOpen,
+                  size: 65.0,
+                  
+                ),
+                  ),
+            ),
+          ],
+      ),
+      ), //End of ListWheelScrollView Grouping
+
+       /*
+         Widget 4 - Continue Button
+         - Should allow user to continue through list of outcomes
+         - until everything has been answered and then you can proceed 
+         - to the next screen
+        @author: JT Kurtz
+        */
+      Expanded(
+         child: Center(
+            child: Column(
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: (){
+                    changeData();
+                  },
+                  padding: const EdgeInsets.all(0.0),
+                  color: Colors.yellow,
+                  child: Text (
+                  'Continue',
+                  style: TextStyle(fontSize: 20.0),
+                  ),
+                  
+                 
+                ),
+              ],
+              ),            
+       ),
+          
+      ), //End of Continue Button Grouping
+],
+),
     ),
-    );
-  }
+    ));
+  }//End of build()
+
 
   void _nextScreen() { //navigates to the Third screen
     Navigator.of(context).push (

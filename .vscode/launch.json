@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        /*
+            Two options to testing the application
+            Comment out the configurations that do not apply 
+            to your system in order to run application
+        */
+
+        {
+            //JT's testing platform
+            "name": "Flutter",
+            "request": "launch",
+            "type": "dart",
+            "program": "/Users/jt/Desktop/Decision-Game/decision_game/lib/main.dart"
+        }
+        /*
+        {
+            //Ryan's testing platform
+            "name": "Dart",
+            "program": "bin/main.dart",
+            "request": "launch",
+            "type": "dart"
+        }
+        */
+    ]
+}
