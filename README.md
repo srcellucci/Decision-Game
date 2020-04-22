@@ -22,7 +22,7 @@ In changes to the main.dart file, i've added the navigation to the second screen
 
 4/9/2020:
     03:20: 
-    [
+    
         1. Forked a new branch to my personal GitHub and to have a copy on my local machine. 
 
         2. Added user interface elements and functionality to 'Goodness Rating' screen. to 'Decision-Game/decision _game/lib/main.dart' file Tested displaying sample outcomes.
@@ -34,9 +34,9 @@ In changes to the main.dart file, i've added the navigation to the second screen
         5. Planning to develop 'Likelihood Ratings' screen with little stylistic features in order to further along logic integration. Also planning to test on making global variable List to contain all the outcomes. Might test into having a Map<Outcomes,List of Ratings> - might have to be handle via logic. 
 
         6. Commented out 'Decision-Game/main.dart' due to conflict with running debugger in VSCode.
-    ]
+    
 4/21/2020:
-  [
+  
   
     1.Refactored our existing codebase
     
@@ -44,4 +44,4 @@ In changes to the main.dart file, i've added the navigation to the second screen
     
     3.Linked existing screens into a functional state that works when the user follows intended input sequence, game breaks for certain edge cases.
     
-    ]
+    
