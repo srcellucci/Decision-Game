@@ -35,4 +35,13 @@ In changes to the main.dart file, i've added the navigation to the second screen
 
         6. Commented out 'Decision-Game/main.dart' due to conflict with running debugger in VSCode.
     ]
-
+4/21/2020:
+  [
+  
+    1.Refactored our existing codebase
+    
+    2.Implemented core logic using DecisionLogic and OutcomeOptionLogic, decision is stored as a global variable initilized once the user submits a decision.
+    
+    3.Linked existing screens into a functional state that works when the user follows intended input sequence, game breaks for certain edge cases.
+    
+    ]
