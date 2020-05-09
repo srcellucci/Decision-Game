@@ -24,36 +24,45 @@ class OutcomeBuilder extends StatefulWidget {
 class _OutcomeBuilder extends State<OutcomeBuilder> with AutomaticKeepAliveClientMixin<OutcomeBuilder>
 {
 
-  List<OutcomeOption> outcomeOptionList;
-
   StreamController<void> buttonPressStream;
   _OutcomeBuilder(this.buttonPressStream);
 
   void removeOutcomeOption(index) //TODO: Ensure count never < 1, handle that exception
   {
     setState(() {
-      outcomeOptionList.remove(index);
+      globals.outcomeOptionList.remove(index);
       globals.count = globals.count - 1;
     });
   }
 
   void addOutcomeOption(){
     setState(() {
-      outcomeOptionList = List.generate(globals.count, (index) => OutcomeOption(removeOutcomeOption, index: index)); //now we use the global var to increment our list for any additional outcomes > 1
+      globals.outcomeOptionList = List.generate(globals.count, (index) => OutcomeOption(removeOutcomeOption, index: index)); //now we use the global var to increment our list for any additional outcomes > 1
       globals.count = globals.count + 1;
     });
   }
 
   void initState(){
     super.initState();
-    outcomeOptionList = List.generate(1, (index) => OutcomeOption(removeOutcomeOption, index: index)); //Create an inital outcome option as to avoid empty list view
-    buttonPressStream.stream.listen( (_) {
-      setState(() {addOutcomeOption();});
-    });
+    if(globals.outcomeOptionList.isEmpty){
+      globals.outcomeOptionList = List.generate(1, (index) => OutcomeOption(removeOutcomeOption, index: index)); //Create an inital outcome option as to avoid empty list view
+      buttonPressStream.stream.listen((_) {
+        setState(() {
+          addOutcomeOption();
+        });
+      });
+    }
+    else{
+      buttonPressStream.stream.listen((_) {
+        setState(() {
+          addOutcomeOption();
+        });
+      });
+    }
   }
   List<OutcomeOption> getList()
   {
-    return outcomeOptionList;
+    return globals.outcomeOptionList;
   }
   @override
   Widget build(BuildContext context)
@@ -61,7 +70,7 @@ class _OutcomeBuilder extends State<OutcomeBuilder> with AutomaticKeepAliveClien
     return Scaffold(
       body: SingleChildScrollView(
         child:Column(
-          children: <Widget>[...outcomeOptionList]
+          children: <Widget>[...globals.outcomeOptionList]
           ,)
       ),
     );

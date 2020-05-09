@@ -30,7 +30,14 @@ class QuestionScreen extends State<FirstScreen> {
         title: Text('Welcome to the Decision Game',
             style: _titleFont), //Top of the screen
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+          FlatButton(
+            onPressed: _nextScreen,
+            textColor: Colors.white,
+            child: Text(
+              "Next",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
         ],
       ),
       body: Padding(
@@ -46,7 +53,11 @@ class QuestionScreen extends State<FirstScreen> {
         ),
       ),
       //child:
-
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Colors.purple,
+        child: Container(height: 50.0,),
+      ),
     );
 
   }

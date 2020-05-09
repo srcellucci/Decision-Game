@@ -18,6 +18,10 @@ class OutcomeOption extends StatelessWidget {
 
 
 
+String setText() {
+    return (outcome != null) ? outcome.getOutcomeText() : " ";
+}
+
 
   OutcomeOption(this.removeOutcomeOption, {Key key, @required this.index})
       : super(key: key);
@@ -27,6 +31,7 @@ class OutcomeOption extends StatelessWidget {
     return new Container(
         child: new Column(children: <Widget>[
           new TextFormField(
+            initialValue:setText(),
             decoration: new InputDecoration(
               labelText: 'Enter Outcome',
               prefixIcon: Icon(Icons.queue),
