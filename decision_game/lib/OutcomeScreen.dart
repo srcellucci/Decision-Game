@@ -21,7 +21,7 @@ class SecondScreen extends StatefulWidget {
 
 //This screen will display the outcomes
 
-class OutcomeScreen extends State<SecondScreen> {
+class OutcomeScreen extends State<SecondScreen> with AutomaticKeepAliveClientMixin<SecondScreen> {
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
   static StreamController<void> buttonPressStream = StreamController<bool>.broadcast();
   final OutcomeBuilder outcomes = new OutcomeBuilder(buttonPressStream);
@@ -52,6 +52,7 @@ class OutcomeScreen extends State<SecondScreen> {
 
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
+        color: Colors.purple,
         child: Container(height: 50.0,),
       ),
 
@@ -90,4 +91,8 @@ class OutcomeScreen extends State<SecondScreen> {
         )
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

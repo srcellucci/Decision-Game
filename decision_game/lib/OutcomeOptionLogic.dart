@@ -7,7 +7,7 @@ class OutcomeOptionLogic{
   OutcomeOptionLogic(String outcomeText){
        this.outcomeText = outcomeText;
        goodness = 0;
-       likelihood = 0;
+       likelihood = 50;
   }
   void setGoodness(int goodness) {
     this.goodness = goodness;

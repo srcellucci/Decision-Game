@@ -13,6 +13,9 @@ class OutcomeOption extends StatelessWidget {
   final int index;
   final Function(OutcomeOption) removeOutcomeOption;
   final TextStyle _biggerFont = const TextStyle(fontSize: 25.0);
+  final int objectIndex = globals.count-1;
+  OutcomeOptionLogic outcome;
+
 
 
 
@@ -25,16 +28,16 @@ class OutcomeOption extends StatelessWidget {
         child: new Column(children: <Widget>[
           new TextFormField(
             decoration: new InputDecoration(
-              labelText: 'Enter Outcome', //TODO: Save outcome string into ExpectedUtil Object/Class
+              labelText: 'Enter Outcome',
               prefixIcon: Icon(Icons.queue),
               suffixIcon: new IconButton(
                 icon: Icon(Icons.clear),
-                onPressed: (){removeOutcomeOption(this);},
+                onPressed: (){removeOutcomeOption(this); globals.decision.removeOutcome(outcome);},
               ),
             ),
             style: _biggerFont,
             onFieldSubmitted: (text){
-             OutcomeOptionLogic outcome = new OutcomeOptionLogic(text);
+              outcome = new OutcomeOptionLogic(text);
              globals.decision.addOutcome(outcome);
             },
           ), SizedBox(height: 50),

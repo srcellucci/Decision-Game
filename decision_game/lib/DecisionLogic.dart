@@ -26,6 +26,10 @@ class DecisionLogic{
      _outcomes.add(outcome);
    }
 
+   void removeOutcome(OutcomeOptionLogic index) {
+      _outcomes.remove(index);
+   }
+
    void setOutcomes(Set<OutcomeOptionLogic> outcomes){
      this._outcomes = outcomes;
    }

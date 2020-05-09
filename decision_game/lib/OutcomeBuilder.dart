@@ -5,6 +5,7 @@
 
 
 import 'dart:async';
+import 'package:decisiongame/OutcomeOptionLogic.dart';
 import 'package:flutter/material.dart';
 import 'package:decisiongame/globals.dart' as globals;
 import 'OutcomeOption.dart';
@@ -20,7 +21,7 @@ class OutcomeBuilder extends StatefulWidget {
 
 }
 
-class _OutcomeBuilder extends State<OutcomeBuilder>
+class _OutcomeBuilder extends State<OutcomeBuilder> with AutomaticKeepAliveClientMixin<OutcomeBuilder>
 {
 
   List<OutcomeOption> outcomeOptionList;
@@ -58,12 +59,16 @@ class _OutcomeBuilder extends State<OutcomeBuilder>
   Widget build(BuildContext context)
   {
     return Scaffold(
-      body: ListView(
-        children: <Widget>[...outcomeOptionList],
-        scrollDirection: Axis.vertical,
+      body: SingleChildScrollView(
+        child:Column(
+          children: <Widget>[...outcomeOptionList]
+          ,)
       ),
     );
 
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
 }
