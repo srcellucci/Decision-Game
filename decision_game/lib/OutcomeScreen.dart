@@ -23,9 +23,8 @@ class SecondScreen extends StatefulWidget {
 
 class OutcomeScreen extends State<SecondScreen> with AutomaticKeepAliveClientMixin<SecondScreen> {
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
-  static StreamController<void> buttonPressStream = StreamController<bool>.broadcast();
   final OutcomeBuilder outcomes = new OutcomeBuilder(buttonPressStream);
-
+  static StreamController<void> buttonPressStream = StreamController<bool>.broadcast();
 
 
   @override
@@ -70,7 +69,14 @@ class OutcomeScreen extends State<SecondScreen> with AutomaticKeepAliveClientMix
           style: _titleFont,
         ), //End of Text
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+          FlatButton(
+            onPressed: _nextScreen,
+            textColor: Colors.white,
+            child: Text(
+              "Next",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
         ],
       ),
     );

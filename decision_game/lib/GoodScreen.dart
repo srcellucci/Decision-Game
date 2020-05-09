@@ -58,7 +58,14 @@ class GoodScreen extends State<ThirdScreen> {
           style: _titleFont,
         ), //End of Text
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+          FlatButton(
+            onPressed: _nextScreen,
+            textColor: Colors.white,
+            child: Text(
+              "Next",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
         ],
       ),
 

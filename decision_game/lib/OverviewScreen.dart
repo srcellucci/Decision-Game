@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'OutputScreen.dart';
 import 'package:decisiongame/globals.dart' as globals;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:decisiongame/OutcomeOptionLogic.dart';
 
 //Creates the Overview Screen
 class FifthScreen extends StatefulWidget {
@@ -189,9 +188,7 @@ class OverviewScreen extends State<FifthScreen> {
       appBar: AppBar(
         title: Text('Overview', style: _titleFont), //Top of the screen
         actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.navigate_next),
-              onPressed: _nextScreen), //creates the 'next' arrow
+          //creates the 'next' arrow
         ],
       ),
       body: Column(
@@ -317,6 +314,21 @@ class OverviewScreen extends State<FifthScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Colors.purple,
+        child: Container(height: 50.0,),
+      ),
+
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: ()=>_nextScreen(),
+        tooltip: 'Increment Counter',
+        backgroundColor: Colors.purple,
+        label: Text('Calculate'),
+      ),
+
+      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
+
     );
   }
 

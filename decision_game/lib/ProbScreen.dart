@@ -112,7 +112,14 @@ class ProbScreen extends State<FourthScreen> {
             style: _titleFont),
         //Top of the screen
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.navigate_next), onPressed: _nextScreen), //creates the 'next' arrow
+          FlatButton(
+            onPressed: _nextScreen,
+            textColor: Colors.white,
+            child: Text(
+              "Next",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ), //creates the 'next' arrow
         ],
       ),
       resizeToAvoidBottomInset: false,
@@ -196,45 +203,27 @@ class ProbScreen extends State<FourthScreen> {
                   ],
                 ),
 
-                /*
-                  Widget 6 - Continue Button
-                  - Allows user to continue through list of outcomes
-                  until everything has bee answered
-                  **If at end of list, change string from 'Next' to 'Continue'
-                */
-                Column(
-                  //crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                  children: <Widget>[
-
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 25,0,0),
-                      child: RaisedButton(
-                        onPressed: () {
-                          changeData();
-                        },
-                        padding: const EdgeInsets.all(10.0),
-                        elevation: 10.0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7.5)
-                        ),
-                        color: Colors.yellow,
-                        child: Text(
-                          'Next',
-                          style: TextStyle(fontSize: 25.0),
-                        ),
-                      ),
-                    ),
-
-                  ],
-                ),
               ],
             ),
           ),
         ),
       ),
 
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Colors.purple,
+        child: Container(height: 50.0,),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: ()=>{changeData()},
+        tooltip: 'Increment Counter',
+        backgroundColor: Colors.purple,
+        child: Icon(Icons.arrow_forward),
+      ),
+
+      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
     );
   }
 
