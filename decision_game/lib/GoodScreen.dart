@@ -22,9 +22,10 @@ class ThirdScreen extends StatefulWidget {
 class GoodScreen extends State<ThirdScreen> {
   //Local variables for Rating Screen
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
-  Set<OutcomeOptionLogic> outcomes = globals.decision.getOutcomes();
-  int index = 0;
-  String _output = "Hello! Welcome to the Ratings Screen.";
+  static Set<OutcomeOptionLogic> outcomes = globals.decision.getOutcomes();
+  static int index = 0;
+  static String _output = outcomes.elementAt(index).getOutcomeText();
+
 
 //Adds things to the list to be further displayed and dynamically rotated about
 
@@ -32,19 +33,8 @@ class GoodScreen extends State<ThirdScreen> {
   void changeData()
   {
     setState((){
-      if (index<outcomes.length)
-      {
-        _output =  outcomes.elementAt(index).getOutcomeText();
-        index++;
-      }//End of if
-      else
-      {
-        if (index >= outcomes.length)
-        {
-          index = 0;
-          _output = outcomes.elementAt(index).getOutcomeText();
-        }//End of if
-      }//End of else
+      _output = outcomes.elementAt((index+1)%outcomes.length).getOutcomeText();
+      index = ((index+1)%outcomes.length);
     });
   }
 

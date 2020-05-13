@@ -25,7 +25,21 @@ class OutcomeScreen extends State<SecondScreen> with AutomaticKeepAliveClientMix
   final TextStyle _titleFont = const TextStyle(fontSize: 20.0);
   final OutcomeBuilder outcomes = new OutcomeBuilder(buttonPressStream);
   static StreamController<void> buttonPressStream = StreamController<bool>.broadcast();
+  int count = 0;
 
+
+
+  void pressStream(){
+    if(count == 0){
+      buttonPressStream.add(null);
+      buttonPressStream.add(null);
+      count++;
+    }
+    else{
+      buttonPressStream.add(null);
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +70,7 @@ class OutcomeScreen extends State<SecondScreen> with AutomaticKeepAliveClientMix
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () => buttonPressStream.add(null),
+        onPressed: () => pressStream(),
         tooltip: 'Increment Counter',
         backgroundColor: Colors.purple,
         child: Icon(Icons.add),
